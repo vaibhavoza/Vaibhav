@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vaibhav.R;
+import com.example.vaibhav.activity.MainActivity;
 import com.example.vaibhav.activity.ModifyEmployeeActivity;
 import com.example.vaibhav.database.DBManager;
 import com.example.vaibhav.model.Employee;
@@ -63,15 +64,29 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
                 context.startActivity(intent);
             }
         });
-        _id = Long.parseLong(employee.getId());
+
         holder.delBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbManager.delete(_id);
-                notifyDataSetChanged();
+                deleteMethod(v,employee);
 //                Toast.makeText(context,"Delete btn:"+employee.getId(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void deleteMethod(View v, Employee employee) {
+        _id = Long.parseLong(employee.getId());
+        dbManager.delete(_id);
+        updateEmplyoeeList(employeeList);
+        //notifyItemRangeChanged(0,employeeList.size());
+    }
+
+    private void updateEmplyoeeList(List<Employee> newemployeeList) {
+        employeeList.clear();
+        employeeList.addAll(newemployeeList);
+        notifyDataSetChanged();
+        context.startActivity(new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+
     }
 
     @Override
