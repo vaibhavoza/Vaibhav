@@ -3,12 +3,12 @@ package com.example.vaibhav.model;
 public class Employee {
     String id;
     String name,email,number;
-    String img;
+    byte[] img;
 
     public Employee() {
     }
 
-    public Employee(String id, String name, String email, String number, String img) {
+    public Employee(String id, String name, String email, String number, byte[] img) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -16,7 +16,7 @@ public class Employee {
         this.img = img;
     }
 
-    public Employee(String name, String email, String number, String img) {
+    public Employee(String name, String email, String number, byte[] img) {
         this.name = name;
         this.email = email;
         this.number = number;
@@ -47,11 +47,11 @@ public class Employee {
         this.number = number;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 

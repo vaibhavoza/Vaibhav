@@ -70,7 +70,9 @@ public class DBManager {
                 user.setEmail(cursor.getString(cursor.getColumnIndex(DatabaseHelper.EMAIL)));
                 user.setNumber(cursor.getString(cursor.getColumnIndex(DatabaseHelper.NUMBER)));
                // byte[] blob = cursor.getBlob(columns.getColumnIndex(IMAGE));
-                user.setImg(cursor.getString(cursor.getColumnIndex(DatabaseHelper.IMAGE)));
+                byte[] blob = cursor.getBlob(cursor.getColumnIndex(DatabaseHelper.IMAGE));
+                user.setImg(blob);
+                        //cursor.getString(cursor.getColumnIndex(DatabaseHelper.IMAGE)));
                 // Adding user record to list
                 userList.add(user);
             } while (cursor.moveToNext());
@@ -80,12 +82,12 @@ public class DBManager {
         return userList;
     }
 
-    public int update(long _id, String name, String email,String number,String image) {
+    public int update(long _id, String name, String email,String number,byte[] image) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.NAME, name);
         contentValues.put(DatabaseHelper.EMAIL, email);
         contentValues.put(DatabaseHelper.NUMBER, number);
-        contentValues.put(IMAGE, image);
+        contentValues.put(DatabaseHelper.IMAGE, image);
         int i = database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper._ID + " = " + _id, null);
         return i;
     }

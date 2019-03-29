@@ -37,6 +37,9 @@ public class AddEmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_employee);
 
+        dbManager=new DBManager(this);
+        dbManager.open();
+
         imageView=findViewById(R.id.imageView);
         nameET=findViewById(R.id.nameET);
         mailET=findViewById(R.id.mailET);
@@ -44,15 +47,6 @@ public class AddEmployeeActivity extends AppCompatActivity {
         imgSelectBTN=findViewById(R.id.imgSelectBTN);
         addRecord=findViewById(R.id.addRecord);
 
-//        Intent intent = getIntent();
-//        String id = intent.getStringExtra("id");
-//        String name = intent.getStringExtra("name");
-//        String email = intent.getStringExtra("email");
-//        String number = intent.getStringExtra("number");
-//        String img = intent.getStringExtra("email");
-
-        dbManager=new DBManager(this);
-        dbManager.open();
 
         imgSelectBTN.setOnClickListener(new View.OnClickListener() {
             @Override
