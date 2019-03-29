@@ -8,11 +8,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.vaibhav.R;
+import com.example.vaibhav.database.DBManager;
 
 public class ModifyEmployeeActivity extends AppCompatActivity {
     private Button imgSelectBTN,updateRecord;
     private EditText nameET,mailET,numberET;
     private ImageView imageView;
+
+    DBManager dbManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

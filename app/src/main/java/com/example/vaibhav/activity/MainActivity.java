@@ -3,6 +3,7 @@ package com.example.vaibhav.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -10,21 +11,38 @@ import android.view.MenuItem;
 
 import com.example.vaibhav.R;
 import com.example.vaibhav.adapter.EmployeeAdapter;
+import com.example.vaibhav.database.DBManager;
+import com.example.vaibhav.database.DatabaseHelper;
+import com.example.vaibhav.model.Employee;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
    RecyclerView employeeRV;
    EmployeeAdapter adapter;
+   List<Employee> employeeList;
+    DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dbManager=new DBManager(this);
+        dbManager.open();
+
+        employeeList=new ArrayList<>();
+        employeeList.addAll(dbManager.getAllUser());
+
+        adapter=new EmployeeAdapter(this,employeeList);
+
         employeeRV=findViewById(R.id.employeeRV);
         employeeRV.setHasFixedSize(true);
+        employeeRV.setItemAnimator(new DefaultItemAnimator());
         employeeRV.setLayoutManager(new LinearLayoutManager(this));
-
+        employeeRV.setAdapter(adapter);
     }
 
     @Override
